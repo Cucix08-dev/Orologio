@@ -115,24 +115,35 @@ main{
     display: flex;
 }
 
-.arrow-clock{
+.arrow-clock,#center-point{
     position: absolute;
     left: 50%;
     transform-origin: left center;
     background: black;
     transition: transform 0.5s ease;
+    border-radius: 4px;
+}
+
+#center-point{
+    padding: 7px;
+    z-index: 4;
+    border-radius: 7px;
+    transform: translateX(-7px);
 }
 
 #sec-arrow{
-    padding: 2px calc(var(--widthAnalogClock)*0.22);
+    padding: 1px calc(var(--widthAnalogClock)*0.22);
+    z-index: 1;
 }
 
 #min-arrow{
-    padding: 4px calc(var(--widthAnalogClock)*0.20);
+    padding: 3px calc(var(--widthAnalogClock)*0.20);
+    z-index: 2;
 }
 
 #hou-arrow{
     padding: 4px calc(var(--widthAnalogClock)*0.1);
+    z-index: 3;
 }
 
 /********************/
