@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="fonts.css">
 </head>
-<body class="normal">
+<body>
     <header>
         <h1>Clock:</h1>
         <div id="selecting-clock-container">
@@ -18,11 +18,11 @@
     </header>
     <main>
         <div id="clock">
-            <div id="analog-clock">
+            <div id="analog-clock" class="hidden">
                 <div id="center-point"></div>
-                <hr id="sec-arrow">
-                <hr id="min-arrow">
-                <hr id="hou-arrow">
+                <hr id="sec-arrow" class="arrow-clock">
+                <hr id="min-arrow" class="arrow-clock">
+                <hr id="hou-arrow" class="arrow-clock">
             </div>
             <div id="digital-clock">
                 <div id="time-standard"></div>

@@ -1,19 +1,26 @@
 //VARS
-const clocks = ["Digital", "Analog", "Roman", "Math", "Programmer"]
+const clocks = ["Digital", "Analog", "Roman", "Math", "Programmer"];
 let clockSelectedIndex = 0;
 
 // CONTAINERS
 const analogClockContainer = document.getElementById("analog-clock");
 analogClockContainer.classList.add("hidden");
 
+const widthAnalogClock = analogClockContainer.offsetWidth;
+
+const clockArrows = document.querySelectorAll(".arrow-clock");
+clockArrows.forEach(el => {
+    el.style.transform = `translateX(${widthAnalogClock/2}px)`;
+    el.style.transform = `rotate(30deg)`;
+});
+
 const digitalClockContainer = document.getElementById("digital-clock");
-const timeContainer = document.getElementById("time-standard") //ONLY FOR DIGITAL CLOCK
+const timeContainer = document.getElementById("time-standard"); //ONLY FOR DIGITAL CLOCK
 
 const clockSelectedContainer = document.getElementById("clock-selected");
 clockSelectedContainer.textContent = clocks[clockSelectedIndex];
 
 const body = document.body;
-body.classList.add("digital");
 
 const leftArrow = document.getElementById("left-arrow");
 const rightArrow = document.getElementById("right-arrow");
@@ -21,15 +28,16 @@ const rightArrow = document.getElementById("right-arrow");
 function controlCase(){
     let font = clocks[clockSelectedIndex].toLowerCase();
 
-    if(clocks[clockSelectedIndex].toLowerCase() == "digital"){
-        digitalClockContainer.classList.remove("hidden");
+    if (clocks[clockSelectedIndex].toLowerCase() == "digital") {
         analogClockContainer.classList.add("hidden");
+        digitalClockContainer.classList.remove("hidden");
     }
-    else{
+    else {
         timeContainer.textContent = "";
         analogClockContainer.classList.remove("hidden");
         digitalClockContainer.classList.add("hidden");
     }
+
 
     body.style.fontFamily = (
         font.toLowerCase()=="math")?
