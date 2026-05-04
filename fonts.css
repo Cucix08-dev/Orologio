@@ -14,6 +14,11 @@
 }
 
 @font-face {
-    font-family: 'math';
+    font-family: 'mathFont';
     src: url("fonts/Math.otf");
+}
+
+@font-face {
+    font-family: 'programmer';
+    src: url("fonts/Programmer.ttf");
 }

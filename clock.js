@@ -23,7 +23,12 @@ leftArrow.addEventListener("click", () => {
     else{
         clockSelectedContainer.textContent = clocks[--clockSelectedIndex];
     }
-    body.style.fontFamily = clocks[clockSelectedIndex].toLowerCase();
+    let font = clocks[clockSelectedIndex].toLowerCase();
+
+    body.style.fontFamily = (
+        font.toLowerCase()=="math")?
+        "mathFont":
+        font.toLowerCase();
 });
 
 rightArrow.addEventListener("click", () => {
@@ -34,7 +39,12 @@ rightArrow.addEventListener("click", () => {
     else{
         clockSelectedContainer.textContent = clocks[++clockSelectedIndex];
     }
-    body.style.fontFamily = clocks[clockSelectedIndex].toLowerCase();
+    let font = clocks[clockSelectedIndex].toLowerCase();
+
+    body.style.fontFamily = (
+        font.toLowerCase()=="math")?
+        "mathFont":
+        font.toLowerCase();
 });
 
 
