@@ -6,13 +6,7 @@ let clockSelectedIndex = 0;
 const analogClockContainer = document.getElementById("analog-clock");
 analogClockContainer.classList.add("hidden");
 
-const widthAnalogClock = analogClockContainer.offsetWidth;
-
 const clockArrows = document.querySelectorAll(".arrow-clock");
-clockArrows.forEach(el => {
-    el.style.transform = `translateX(${widthAnalogClock/2}px)`;
-    el.style.transform = `rotate(30deg)`;
-});
 
 const digitalClockContainer = document.getElementById("digital-clock");
 const timeContainer = document.getElementById("time-standard"); //ONLY FOR DIGITAL CLOCK
@@ -91,5 +85,22 @@ setInterval(() => {
     else{
         timeContainer.textContent = ""
     }
-}, 100);
+
+    const hourAngle = ((hours % 12) + minutes / 60) * 30 - 90;
+    const minAngle = (minutes + seconds / 60) * 6 - 90;
+    const secAngle = seconds * 6 - 90;
+
+    clockArrows.forEach(el => {
+        if (el.id === "hou-arrow") {
+            el.style.transform = `rotate(${hourAngle}deg)`
+        }
+        else if (el.id === "min-arrow") {
+            el.style.transform = `rotate(${minAngle}deg)`
+        }
+        else if (el.id === "sec-arrow") {
+            el.style.transform = `rotate(${secAngle}deg)`
+        }
+    });
+
+}, 1000);
 

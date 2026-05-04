@@ -7,6 +7,8 @@
         rgb(49, 25, 120),
         rgb(69, 27, 114)
     );
+
+    --widthAnalogClock: min(50vw,500px);
 }
 
 body{
@@ -106,32 +108,31 @@ main{
 #analog-clock{
     border-radius: 9999px;
     aspect-ratio: 1/1;
-    width: min(50vw,500px);
+    width: var(--widthAnalogClock);
     border: 8px solid black;
     background-color: white;
     align-items: center;
     display: flex;
 }
 
-hr{
-    margin: 0;
+.arrow-clock{
+    position: absolute;
+    left: 50%;
+    transform-origin: left center;
+    background: black;
+    transition: transform 0.5s ease;
 }
 
-hr#sec-arrow{
-    width: min(15vw,160px);
-    border: 2px solid black;
+#sec-arrow{
+    padding: 2px calc(var(--widthAnalogClock)*0.22);
 }
 
-hr#min-arrow{
-    width: min(14vw,155px);
+#min-arrow{
+    padding: 4px calc(var(--widthAnalogClock)*0.20);
 }
 
-hr#hou-arrow{
-    width: min(7.5vw,75px);
-}
-
-hr#hou-arrow,hr#min-arrow{
-    border: 4px solid black;
+#hou-arrow{
+    padding: 4px calc(var(--widthAnalogClock)*0.1);
 }
 
 /********************/
@@ -139,7 +140,7 @@ hr#hou-arrow,hr#min-arrow{
 /********************/
 
 .hidden{
-    display: none;
+    display: none !important;
 }
 
 ::selection{
