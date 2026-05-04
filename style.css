@@ -146,6 +146,22 @@ main{
     z-index: 3;
 }
 
+.arrows-mini{
+    background: black;
+    border-radius: 2px;
+    position:absolute;
+    transform: translate(-50%, -50%);
+}
+
+.hours-arrows-mini{
+    padding: 6px calc(var(--widthAnalogClock)*0.015);
+}
+
+.minutes-arrows-mini{
+    padding: 6px calc(var(--widthAnalogClock)*0.005);
+}
+
+
 /********************/
 /********OTHER*******/
 /********************/

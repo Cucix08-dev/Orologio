@@ -1,10 +1,13 @@
 //VARS
 const clocks = ["Digital", "Analog", "Roman", "Math", "Programmer"];
 let clockSelectedIndex = 0;
+let rect;
 
 // CONTAINERS
 const analogClockContainer = document.getElementById("analog-clock");
 analogClockContainer.classList.add("hidden");
+
+const miniArrowsContainer = document.getElementById("mini-arrows-container")
 
 const clockArrows = document.querySelectorAll(".arrow-clock");
 
@@ -19,6 +22,91 @@ const body = document.body;
 const leftArrow = document.getElementById("left-arrow");
 const rightArrow = document.getElementById("right-arrow");
 
+function generateMiniArrows() {
+
+    miniArrowsContainer.innerHTML = "";
+
+    const w = analogClockContainer.offsetWidth;
+    const h = analogClockContainer.offsetHeight;
+
+    if (w === 0 || h === 0) {
+        requestAnimationFrame(generateMiniArrows);
+        return;
+    }
+
+    const centerX = w / 2;
+    const centerY = h / 2;
+    const radius = Math.min(centerX, centerY) - 10;
+
+    let xs = [];
+    let ys = [];
+
+    // --- PRIMA PASSATA: calcolo tutte le X e Y delle ORE ---
+    for (let deg = 0; deg < 360; deg += 30) {
+        const rad = (deg - 90) * Math.PI / 180;
+
+        const x = centerX + Math.cos(rad) * radius;
+        const y = centerY + Math.sin(rad) * radius;
+
+        xs.push(x);
+        ys.push(y);
+    }
+
+    const minX = Math.min(...xs);
+    const minY = Math.min(...ys);
+
+    const offsetX = analogClockContainer.offsetLeft - minX;
+    const offsetY = analogClockContainer.offsetTop - minY;
+
+    // --- SECONDA PASSATA: ORE ---
+    for (let deg = 0; deg < 360; deg += 30) {
+
+        const el = document.createElement("div");
+        el.classList.add("hours-arrows-mini", "arrows-mini");
+
+        const rad = (deg - 90) * Math.PI / 180;
+
+        const x = centerX + Math.cos(rad) * radius;
+        const y = centerY + Math.sin(rad) * radius;
+
+        const finalX = x + offsetX;
+        const finalY = y + offsetY;
+
+        el.style.left = finalX + 2.5 + "px";
+        el.style.top = finalY + 5 + "px";
+        el.style.transform = `rotate(${deg}deg)`;
+
+        miniArrowsContainer.appendChild(el);
+    }
+
+    // --- TERZA PASSATA: MINUTI (ogni 6°) ---
+    for (let deg = 0; deg < 360; deg += 6) {
+
+        // salta i punti delle ore (già disegnati)
+        if (deg % 30 === 0) continue;
+
+        const el = document.createElement("div");
+        el.classList.add("minutes-arrows-mini", "arrows-mini");
+
+        const rad = (deg - 90) * Math.PI / 180;
+
+        const x = centerX + Math.cos(rad) * radius;
+        const y = centerY + Math.sin(rad) * radius;
+
+        const finalX = x + offsetX;
+        const finalY = y + offsetY;
+
+        el.style.left = finalX + 7.5 + "px";
+        el.style.top = finalY + 4 + "px";
+        el.style.transform = `rotate(${deg}deg)`;
+
+        miniArrowsContainer.appendChild(el);
+    }
+}
+
+
+
+//SELECTION CLOCKS
 function controlCase(){
     let font = clocks[clockSelectedIndex].toLowerCase();
 
@@ -65,6 +153,7 @@ rightArrow.addEventListener("click", () => {
     
 });
 
+
 //TIME UPDATE
 setInterval(() => {
     const time = new Date();
@@ -102,5 +191,5 @@ setInterval(() => {
         }
     });
 
+    generateMiniArrows()
 }, 1000);
-
