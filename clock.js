@@ -79,10 +79,8 @@ function generateMiniArrows() {
         miniArrowsContainer.appendChild(el);
     }
 
-    // --- TERZA PASSATA: MINUTI (ogni 6°) ---
     for (let deg = 0; deg < 360; deg += 6) {
 
-        // salta i punti delle ore (già disegnati)
         if (deg % 30 === 0) continue;
 
         const el = document.createElement("div");
