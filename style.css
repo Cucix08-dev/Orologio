@@ -20,20 +20,32 @@ body{
     font-family: 'digital';
 }
 
+/********************/
+/*******HEADER*******/
+/********************/
+
 header{
     width: inherit;
-    height: 15vh;
-    height: 15dvh;
+    height: 20vh;
+    height: 20dvh;
     flex-direction: column;
     display: flex;
     justify-content: center;
 }
 
+/********************/
+/*******TITLE********/
+/********************/
+
 header h1{
     text-align: center;
     font-size: clamp(1rem,5vw,3rem);
-    margin-top: 20%;
+    margin-top: 200px;
 }
+
+/********************/
+/******SE. CLOCK*****/
+/********************/
 
 #selecting-clock-container{
     display: flex;
@@ -69,4 +81,43 @@ header h1{
 #clock-selected::selection{
     background: transparent;
     color: inherit;
+}
+
+/********************/
+/*******CLOCKS*******/
+/********************/
+
+main{
+    height: 80vh;
+    height: 80dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#clock{
+    margin: 10px auto;
+}
+
+#digital-clock{
+    font-size: clamp(2rem,10vw,7.5rem);
+}
+
+#analog-clock{
+    border-radius: 9999px;
+    aspect-ratio: 1/1;
+    width: clamp(5em, 50vw, 30em);
+    border: 2px solid white;
+}
+
+/********************/
+/********OTHER*******/
+/********************/
+
+.hidden{
+    display: none;
+}
+
+::selection{
+    background: transparent;
 }
