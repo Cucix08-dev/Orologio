@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'digital';
+    src: url("fonts/Digital.otf");
+}
+
+@font-face {
+    font-family: 'analog';
+    src: url("fonts/Analog.ttf");
+}
+
+@font-face {
+    font-family: 'roman';
+    src: url("fonts/Roman.ttf");
+}
+
+@font-face {
+    font-family: 'math';
+    src: url("fonts/Math.otf");
+}

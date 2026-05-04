@@ -9,11 +9,6 @@
     );
 }
 
-@font-face {
-    font-family: 'Modern font';
-    src: url();
-}
-
 body{
     padding: 0;
     margin: 0;
