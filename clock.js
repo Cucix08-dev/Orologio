@@ -235,6 +235,7 @@ setInterval(() => {
         hourNumber.classList.add("hour-number");
         hoursNumbersContainer.appendChild(hourNumber);
         let mathX = 0;
+        let mathY = 0;
 
         if (font === "analog") {
             hourNumber.textContent = index + 1;
@@ -246,6 +247,7 @@ setInterval(() => {
         else if (font === "math") {
             hourNumber.textContent = mathHours[index];
             mathX = 4;
+            mathY = 4;
         }
 
         const deg = index * 30;
@@ -255,7 +257,7 @@ setInterval(() => {
         const y = centerY + Math.sin(rad) * radiusNumbers;
 
         hourNumber.style.left = (x + offsetX + 4 - mathX) + "px";
-        hourNumber.style.top  = (y + offsetY + 4)   + "px";
+        hourNumber.style.top  = (y + offsetY + 4 - mathY)   + "px";
     }
 
     generateMiniArrows()
