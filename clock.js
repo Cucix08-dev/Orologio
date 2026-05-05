@@ -145,12 +145,12 @@ function controlCase() {
     if (font === "digital") {
         analogClockContainer.classList.add("hidden");
         digitalClockContainer.classList.remove("hidden");
-        return;
     }
-
-    analogClockContainer.classList.remove("hidden");
-    digitalClockContainer.classList.add("hidden");
-    timeContainer.textContent = "";
+    else{
+        analogClockContainer.classList.remove("hidden");
+        digitalClockContainer.classList.add("hidden");
+        timeContainer.textContent = "";
+    }
 
     body.style.fontFamily = (font === "math") ? "mathFont" : font;
 }
