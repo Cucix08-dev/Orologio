@@ -8,7 +8,7 @@
         rgb(69, 27, 114)
     );
 
-    --widthAnalogClock: clamp(100px,min(40vw,40dvh),450px);
+    --widthAnalogClock: clamp(200px,min(70vw,70dvh),450px);
 }
 
 body{
