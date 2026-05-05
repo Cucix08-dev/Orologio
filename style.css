@@ -8,7 +8,7 @@
         rgb(69, 27, 114)
     );
 
-    --widthAnalogClock: min(50vw,500px);
+    --widthAnalogClock: clamp(100px,min(40vw,40dvh),450px);
 }
 
 body{
@@ -54,7 +54,7 @@ header h1{
     justify-content: center;
     align-items: center;
 
-    font-size: clamp(1rem,3vw,2.5rem);
+    font-size: clamp(0.5rem,2vw,2.5rem);
     
     border: 2px solid white;
     border-radius: 20px;
@@ -90,7 +90,7 @@ header h1{
 /********************/
 
 main{
-    height: 80vh;
+    margin-top: 5vh;
     height: 80dvh;
     display: flex;
     align-items: center;
@@ -154,13 +154,19 @@ main{
 }
 
 .hours-arrows-mini{
-    padding: 6px calc(var(--widthAnalogClock)*0.015);
+    padding: 7px calc(var(--widthAnalogClock)*0.015);
 }
 
 .minutes-arrows-mini{
-    padding: 6px calc(var(--widthAnalogClock)*0.005);
+    padding: 6px calc(var(--widthAnalogClock)*0.003);
 }
 
+.hour-number{
+    font-size: clamp(0.5rem,1.5vw,1.3rem);
+    position: absolute;
+    color: black;
+    font-weight: bolder;
+}
 
 /********************/
 /********OTHER*******/
@@ -172,4 +178,23 @@ main{
 
 ::selection{
     background: transparent;
+}
+
+/********************/
+/********MEDIA*******/
+/********************/
+
+@media (max-height:832px){
+    header{
+        flex-direction: row;
+    }
+
+    header h1{
+        margin-top: 50px;
+    }
+
+    .selection-arrow{
+        padding: 5px;
+        border: none;
+    }
 }

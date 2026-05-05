@@ -1,4 +1,34 @@
 //VARS
+const mathHours = [
+    "Γ(2)",            // 1
+    "⌊e⌋",             // 2
+    "⌊π⌋",        // 3
+    "2²",              // 4
+    "⌈φ³⌉",            // 5
+    "3!",              // 6
+    "⌈π⌉ + 4",         // 7
+    "2³",              // 8
+    "3! + 3",          // 9
+    "⌊π²⌋ + 1",        // 10
+    "(3!)² - 25",      // 11
+    "3·4"              // 12
+];
+
+const romanHours = [
+    "I",            // 1
+    "II",             // 2
+    "III",        // 3
+    "IV",              // 4
+    "V",            // 5
+    "VI",              // 6
+    "VII",         // 7
+    "VIII",              // 8
+    "IX",          // 9
+    "X",        // 10
+    "XI",      // 11
+    "XII"              // 12
+];
+
 const clocks = ["Digital", "Analog", "Roman", "Math", "Programmer"];
 let clockSelectedIndex = 0;
 let rect;
@@ -8,6 +38,8 @@ const analogClockContainer = document.getElementById("analog-clock");
 analogClockContainer.classList.add("hidden");
 
 const miniArrowsContainer = document.getElementById("mini-arrows-container")
+
+const hoursNumbersContainer = document.getElementById("hours-numbers");
 
 const clockArrows = document.querySelectorAll(".arrow-clock");
 
@@ -22,32 +54,25 @@ const body = document.body;
 const leftArrow = document.getElementById("left-arrow");
 const rightArrow = document.getElementById("right-arrow");
 
-function generateMiniArrows() {
+let font;
 
-    miniArrowsContainer.innerHTML = "";
+function computeClockGeometry() {
 
     const w = analogClockContainer.offsetWidth;
     const h = analogClockContainer.offsetHeight;
-
-    if (w === 0 || h === 0) {
-        requestAnimationFrame(generateMiniArrows);
-        return;
-    }
 
     const centerX = w / 2;
     const centerY = h / 2;
     const radius = Math.min(centerX, centerY) - 10;
 
+    // Prima passata: calcolo X/Y delle ore
     let xs = [];
     let ys = [];
 
-    // --- PRIMA PASSATA: calcolo tutte le X e Y delle ORE ---
     for (let deg = 0; deg < 360; deg += 30) {
         const rad = (deg - 90) * Math.PI / 180;
-
         const x = centerX + Math.cos(rad) * radius;
         const y = centerY + Math.sin(rad) * radius;
-
         xs.push(x);
         ys.push(y);
     }
@@ -58,27 +83,40 @@ function generateMiniArrows() {
     const offsetX = analogClockContainer.offsetLeft - minX;
     const offsetY = analogClockContainer.offsetTop - minY;
 
-    // --- SECONDA PASSATA: ORE ---
+    return {
+        w, h,
+        centerX, centerY,
+        radius,
+        offsetX, offsetY
+    };
+}
+
+
+function generateMiniArrows() {
+
+    miniArrowsContainer.innerHTML = "";
+
+    const geo = computeClockGeometry();
+    const { centerX, centerY, radius, offsetX, offsetY } = geo;
+
+    // ORE
     for (let deg = 0; deg < 360; deg += 30) {
 
         const el = document.createElement("div");
         el.classList.add("hours-arrows-mini", "arrows-mini");
 
         const rad = (deg - 90) * Math.PI / 180;
-
         const x = centerX + Math.cos(rad) * radius;
         const y = centerY + Math.sin(rad) * radius;
 
-        const finalX = x + offsetX;
-        const finalY = y + offsetY;
-
-        el.style.left = finalX + 2.5 + "px";
-        el.style.top = finalY + 5 + "px";
+        el.style.left = (x + offsetX + 4) + "px";
+        el.style.top  = (y + offsetY + 3) + "px";
         el.style.transform = `rotate(${deg}deg)`;
 
         miniArrowsContainer.appendChild(el);
     }
 
+    // MINUTI
     for (let deg = 0; deg < 360; deg += 6) {
 
         if (deg % 30 === 0) continue;
@@ -87,15 +125,11 @@ function generateMiniArrows() {
         el.classList.add("minutes-arrows-mini", "arrows-mini");
 
         const rad = (deg - 90) * Math.PI / 180;
-
         const x = centerX + Math.cos(rad) * radius;
         const y = centerY + Math.sin(rad) * radius;
 
-        const finalX = x + offsetX;
-        const finalY = y + offsetY;
-
-        el.style.left = finalX + 7.5 + "px";
-        el.style.top = finalY + 4 + "px";
+        el.style.left = (x + offsetX + 7.7) + "px";
+        el.style.top  = (y + offsetY + 4) + "px";
         el.style.transform = `rotate(${deg}deg)`;
 
         miniArrowsContainer.appendChild(el);
@@ -103,27 +137,24 @@ function generateMiniArrows() {
 }
 
 
-
 //SELECTION CLOCKS
-function controlCase(){
-    let font = clocks[clockSelectedIndex].toLowerCase();
+function controlCase() {
 
-    if (clocks[clockSelectedIndex].toLowerCase() == "digital") {
+    font = clocks[clockSelectedIndex].toLowerCase();
+
+    if (font === "digital") {
         analogClockContainer.classList.add("hidden");
         digitalClockContainer.classList.remove("hidden");
-    }
-    else {
-        timeContainer.textContent = "";
-        analogClockContainer.classList.remove("hidden");
-        digitalClockContainer.classList.add("hidden");
+        return;
     }
 
+    analogClockContainer.classList.remove("hidden");
+    digitalClockContainer.classList.add("hidden");
+    timeContainer.textContent = "";
 
-    body.style.fontFamily = (
-        font.toLowerCase()=="math")?
-        "mathFont":
-        font.toLowerCase();
+    body.style.fontFamily = (font === "math") ? "mathFont" : font;
 }
+
 
 leftArrow.addEventListener("click", () => {
     if (clockSelectedIndex-1<0) {
@@ -148,6 +179,8 @@ rightArrow.addEventListener("click", () => {
     }
     
     controlCase();
+
+
     
 });
 
@@ -188,6 +221,42 @@ setInterval(() => {
             el.style.transform = `rotate(${secAngle}deg)`
         }
     });
+
+    hoursNumbersContainer.innerHTML = "";
+
+    const geo = computeClockGeometry();
+    const { centerX, centerY, radius, offsetX, offsetY } = geo;
+
+    const radiusNumbers = radius * 0.90;
+
+    for (let index = 0; index < 12; index++) {
+
+        const hourNumber = document.createElement("div");
+        hourNumber.classList.add("hour-number");
+        hoursNumbersContainer.appendChild(hourNumber);
+        let mathX = 0;
+
+        if (font === "analog") {
+            hourNumber.textContent = index + 1;
+            hourNumber.style.fontFamily = "Courier New";
+        } 
+        else if (font === "roman") {
+            hourNumber.textContent = romanHours[index];
+        } 
+        else if (font === "math") {
+            hourNumber.textContent = mathHours[index];
+            mathX = 4;
+        }
+
+        const deg = index * 30;
+        const rad = (deg - 60) * Math.PI / 180;
+
+        const x = centerX + Math.cos(rad) * radiusNumbers;
+        const y = centerY + Math.sin(rad) * radiusNumbers;
+
+        hourNumber.style.left = (x + offsetX + 4 - mathX) + "px";
+        hourNumber.style.top  = (y + offsetY + 4)   + "px";
+    }
 
     generateMiniArrows()
 }, 1000);
