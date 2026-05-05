@@ -50,6 +50,7 @@ const clockSelectedContainer = document.getElementById("clock-selected");
 clockSelectedContainer.textContent = clocks[clockSelectedIndex];
 
 const body = document.body;
+body.style.fontFamily = 'digital';
 
 const leftArrow = document.getElementById("left-arrow");
 const rightArrow = document.getElementById("right-arrow");
@@ -261,4 +262,4 @@ setInterval(() => {
     }
 
     generateMiniArrows()
-}, 1000);
+}, 100);
