@@ -6,6 +6,7 @@
     <title>Clock</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="spans.css">
 </head>
 <body>
     <header>
@@ -18,6 +19,7 @@
     </header>
     <main>
         <div id="clock">
+            <!-- ONLY analog roman(analog) math(analog) -->
             <div id="analog-clock" class="hidden">
                 <div id="center-point"></div>
 
@@ -29,8 +31,19 @@
 
                 <div id="hours-numbers"></div>
             </div>
+
+            <!-- ONLY digital -->
             <div id="digital-clock">
                 <div id="time-standard"></div>
+            </div>
+
+            <!-- ONLY programmer -->
+            <div id="programmer-clock" class="hidden">
+                <pre>
+                    <code id="code-clock">
+
+                    </code>
+                </pre>
             </div>
         </div>
     </main>

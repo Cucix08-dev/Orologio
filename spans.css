@@ -1,0 +1,15 @@
+.const{
+    color: rgb(0, 113, 162);
+}
+
+.var{
+    color: rgb(41, 168, 211);
+}
+
+.value{
+    color: greenyellow;
+}
+
+.str{
+    color: rgb(255, 153, 0);
+}
