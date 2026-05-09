@@ -220,12 +220,12 @@ setInterval(() => {
         }
     }
 
-    if (clocks[clockSelectedIndex].toLowerCase() == "digital") {
+    if (clocks[clockSelectedIndex].toLowerCase() === "digital") {
         timeContainer.textContent = timeARR[0] + " : " + timeARR[1] + " : " + timeARR[2];
     }
-    else if (clocks[clockSelectedIndex].toLowerCase() == "programmer"){
-        const day = time.getDay();
-        const month = time.getMonth();
+    else if (clocks[clockSelectedIndex].toLowerCase() === "programmer"){
+        const day = time.getDate();
+        const month = time.getMonth() + 1;
         const year = time.getFullYear();
         const dayOfWeek = new Date().toLocaleDateString("en-EN", { weekday: "long" });
 
